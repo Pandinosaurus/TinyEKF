@@ -23,13 +23,20 @@ def main():
     print('class EkfCore {\n')
     print('    public:\n')
 
-    for i in range(n):
-        print('        float x%d;' % i)
+    print('        float', end=' ')
 
-    print('\n    EkfCore(', end='\n          ')
+    print(', '.join([('x%d%c' %
+                              (i, ';' if i == n - 1 else ' '))
+                             for i in range(n)]))
+
+    print('\n        EkfCore(', end='\n          ')
+
     print('        , '.join([('const float x%d%c' %
                               (i, ')' if i == n - 1 else '\n'))
                              for i in range(n)]))
+    print('    {}')
+
+    print('};')
 
 
 main()
