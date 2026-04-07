@@ -31,7 +31,8 @@ def main():
     for i in range(n):
         print('            ', end='')
         for j in range(n):
-            print('p%d%d%s' % (i, j, ',\n' if j == n - 1 else ', '), end='')
+            print('p%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ';')
+        print()
 
 
     print('\n        EkfCore() = default;')
