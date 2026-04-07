@@ -24,19 +24,18 @@ def main():
     print('    public:\n')
 
     print('        float', end=' ')
+    for i in range(n):
+        print('x%d%s' % (i, ';\n' if i == n - 1 else ', '), end='')
 
-    print(', '.join([('x%d%c' %
-                              (i, ';' if i == n - 1 else ' '))
-                             for i in range(n)]))
+    print('\n        float')
+    for i in range(n):
+        print('            ', end='')
+        for j in range(n):
+            print('p%d%d%s' % (i, j, ',\n' if j == n - 1 else ', '), end='')
 
-    print('\n        EkfCore(', end='\n          ')
 
-    print('        , '.join([('const float x%d%c' %
-                              (i, ')' if i == n - 1 else '\n'))
-                             for i in range(n)]))
-    print('    {}')
+    print('\n        EkfCore() = default;')
 
     print('};')
-
 
 main()
