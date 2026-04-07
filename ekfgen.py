@@ -15,6 +15,11 @@ def beginclass(name):
     print('    class %s {\n' % name)
     print('        public:\n')
 
+
+def writedefault(name):
+
+    print('\n            %s() = default;' % name)
+
 def endclass():
 
     print('    };\n')
@@ -38,6 +43,8 @@ def main():
     for i in range(n):
         print('_%d%s' % (i, ';\n' if i == n - 1 else ', '), end='')
 
+    writedefault('Vector')
+
     endclass()
 
     beginclass('Matrix')
@@ -48,12 +55,16 @@ def main():
             print('_%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ';')
         print()
 
+    writedefault('Matrix')
+
     endclass()
 
     beginclass('Helper')
 
     print('            Vector x;')
     print('            Matrix P;')
+
+    writedefault('Helper')
 
     endclass()
 
