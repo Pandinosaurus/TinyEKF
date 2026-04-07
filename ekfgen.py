@@ -33,22 +33,15 @@ def main():
 
     print('    };\n')
 
-    print('    class EkfCore {\n')
+    print('    class Matrix {\n')
 
     print('        public:\n')
 
-    print('            float', end=' ')
-    for i in range(n):
-        print('x%d%s' % (i, ';\n' if i == n - 1 else ', '), end='')
-
-    print('\n            float')
     for i in range(n):
         print('            ', end='')
         for j in range(n):
-            print('p%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ';')
+            print('_%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ';')
         print()
-
-    print('\n            EkfCore() = default;')
 
     print('    };')
 
