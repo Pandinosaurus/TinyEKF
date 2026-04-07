@@ -10,6 +10,15 @@ import argparse
 from argparse import ArgumentDefaultsHelpFormatter
 
 
+def beginclass(name):
+
+    print('    class %s {\n' % name)
+    print('        public:\n')
+
+def endclass():
+
+    print('    };\n')
+
 def main():
 
     parser = argparse.ArgumentParser(
@@ -23,19 +32,15 @@ def main():
 
     print('namespace tinyekf {\n')
 
-    print('    class Vector {\n')
-
-    print('        public:\n')
+    beginclass('Vector')
 
     print('            float', end=' ')
     for i in range(n):
         print('_%d%s' % (i, ';\n' if i == n - 1 else ', '), end='')
 
-    print('    };\n')
+    endclass()
 
-    print('    class Matrix {\n')
-
-    print('        public:\n')
+    beginclass('Matrix')
 
     for i in range(n):
         print('            ', end='')
@@ -43,7 +48,7 @@ def main():
             print('_%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ';')
         print()
 
-    print('    };')
+    endclass()
 
     print('}\n')
 
