@@ -50,6 +50,9 @@ def main():
 
     endclass()
 
+    beginclass('Helper')
+    endclass()
+
     print('}\n')
 
 
