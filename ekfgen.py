@@ -51,6 +51,10 @@ def main():
     endclass()
 
     beginclass('Helper')
+
+    print('            Vector x;')
+    print('            Matrix P;')
+
     endclass()
 
     print('}\n')
