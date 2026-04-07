@@ -24,18 +24,8 @@ def endclass():
 
     print('    };\n')
 
-def main():
 
-    parser = argparse.ArgumentParser(
-            formatter_class=ArgumentDefaultsHelpFormatter)
-    parser.add_argument('n', help='Stae vector dimensionality')
-    args = parser.parse_args()
-
-    n = int(args.n)
-
-    print('#pragma once\n')
-
-    print('namespace tinyekf {\n')
+def declare_vector(n):
 
     beginclass('Vector')
 
@@ -46,6 +36,9 @@ def main():
     writedefault('Vector')
 
     endclass()
+
+
+def declare_matrix(n):
 
     beginclass('Matrix')
 
@@ -59,6 +52,9 @@ def main():
 
     endclass()
 
+
+def declare_helper(n):
+
     beginclass('Helper')
 
     print('            Vector x;')
@@ -67,6 +63,26 @@ def main():
     writedefault('Helper')
 
     endclass()
+
+
+def main():
+
+    parser = argparse.ArgumentParser(
+            formatter_class=ArgumentDefaultsHelpFormatter)
+    parser.add_argument('n', help='Stae vector dimensionality')
+    args = parser.parse_args()
+
+    n = int(args.n)
+
+    print('#pragma once\n')
+
+    print('namespace tinyekf {\n')
+
+    declare_vector(n)
+
+    declare_matrix(n)
+
+    declare_helper(n)
 
     print('}\n')
 
