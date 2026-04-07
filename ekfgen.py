@@ -9,6 +9,7 @@ MIT License
 import argparse
 from argparse import ArgumentDefaultsHelpFormatter
 
+
 def main():
 
     parser = argparse.ArgumentParser(
@@ -26,8 +27,9 @@ def main():
         print('        float x%d;' % i)
 
     print('\n    EkfCore(', end='\n          ')
-    print('        , '.join([('const float x%d%c' % (i, ')' if i==n-1 else '\n')) for i in range(n)]))
+    print('        , '.join([('const float x%d%c' %
+                              (i, ')' if i == n - 1 else '\n'))
+                             for i in range(n)]))
 
 
- 
 main()
