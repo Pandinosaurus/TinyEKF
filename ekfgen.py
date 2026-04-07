@@ -34,9 +34,9 @@ def main():
             print('p%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ';')
         print()
 
-
     print('\n        EkfCore() = default;')
 
     print('};')
+
 
 main()
