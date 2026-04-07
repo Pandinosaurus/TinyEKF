@@ -18,9 +18,16 @@ def main():
 
     n = int(args.n)
 
-    print('#pragma once\n\n')
-    print('class EkfCore {\n\n')
-    print('    public:\n\n')
+    print('#pragma once\n')
+    print('class EkfCore {\n')
+    print('    public:\n')
+
+    for i in range(n):
+        print('        float x%d;' % i)
+
+    print('\n    EkfCore(', end='\n          ')
+    print('        , '.join([('const float x%d%c' % (i, ')' if i==n-1 else '\n')) for i in range(n)]))
+
 
  
 main()
