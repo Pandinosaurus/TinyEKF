@@ -81,6 +81,35 @@ def declare_matrix(n):
     endclass()
 
 
+def declare_predict():
+
+    print()
+    print('            // P_k = F_{k-1} P_{k-1} F^T_{k-1} --------------------')
+    print('            auto predict(const Matrix & F) -> Matrix')
+    print('            {')
+    print('                Matrix FP;')
+    print('                dot(F, P, FP);\n')
+    print('                Matrix Ft;')
+    print('                trans(F, Ft);\n')
+    print('                dot(FP, Ft, P);')
+    print('            }\n')
+
+
+
+def declare_trans(n):
+
+    print()
+    print('            // At = A^T')
+    print('            static void trans(const Matrix & A, Matrix & At)')
+    print('            {')
+    for i in range(n):
+        print('              ', end='')
+        for j in range(n):
+            print('At._%d%d=A._%d%d;' % (i, j, j, i), end=' ')
+        print()
+    print('            }\n')
+
+
 def declare_core(n):
 
     beginclass('Core')
@@ -92,6 +121,13 @@ def declare_core(n):
 
     print('Vector & x, Matrix & P) : x(x), P(P) {}')
 
+    #declare_predict()
+
+    print('        private:\n')
+
+    #declare_dot1(n)
+    #declare_dot1(n)
+    declare_trans(n)
     endclass()
 
 
