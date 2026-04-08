@@ -6,5 +6,8 @@ tester.o: tester.cpp tinyekf.hpp
 tinyekf.hpp: ekfgen.py
 	./ekfgen.py 7 > tinyekf.hpp
 
+dump:
+	./ekfgen.py 7 | less
+
 clean:
 	rm -f tester.o tinyekf.hpp

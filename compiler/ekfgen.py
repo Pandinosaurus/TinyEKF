@@ -133,8 +133,10 @@ def declare_outer(n):
           'const Vector &y, Matrix &A)')
     beginmethod()
     for i in range(n):
+        print('                ', end='')
         for j in range(n):
-            pass  # print('                C._%d%d = ' % (i, j), end='')
+            print('A._%d%d = x._%d*y._%d; ' % (i, j, i, j), end='')
+        print()
     endmethod()
 
 
