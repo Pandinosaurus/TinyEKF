@@ -33,13 +33,16 @@ def endmethod():
 def endclass():
     print('    };\n')
 
+def split(i, n, s1, s2):
+    return s2 if i == n-1 else s1
+
 def declare_vector(n):
 
     beginclass('Vector')
 
     write('            float ')
     for i in range(n):
-        write('_%d%s' % (i, ';\n' if i == n - 1 else ', '))
+        write('_%d%s' % (i, split(i, n, ', ', ';\n')))
 
     writedefault('Vector')
 
@@ -98,7 +101,6 @@ def declare_predict():
     print('                trans(F, Ft);\n')
     print('                dot(FP, Ft, P);')
     endmethod()
-
 
 
 def declare_add_covariance_noise(n):
