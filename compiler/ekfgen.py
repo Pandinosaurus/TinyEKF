@@ -11,22 +11,24 @@ from argparse import ArgumentDefaultsHelpFormatter
 
 
 def beginclass(name):
-
     print('    class %s {\n' % name)
     print('        public:\n')
 
 
 def writedefault(name):
-
     print('\n            %s() = default;' % name)
-
     print('\n            %s(' % name, end='')
 
 
+def beginmethod():
+    print('            {')
+
+
+def endmethod():
+    print('            }\n')
+
 def endclass():
-
     print('    };\n')
-
 
 def declare_vector(n):
 
@@ -84,60 +86,69 @@ def declare_matrix(n):
 
 def declare_predict():
 
-    print()
     print('            // P_k = F_{k-1} P_{k-1} F^T_{k-1} -------------------')
     print('            auto predict(const Matrix & F) -> Matrix')
-    print('            {')
+    beginmethod()
     print('                Matrix FP;')
     print('                dot(F, P, FP);\n')
     print('                Matrix Ft;')
     print('                trans(F, Ft);\n')
     print('                dot(FP, Ft, P);')
-    print('            }\n')
+    endmethod()
 
 
 def declare_dot_ax(n):
 
-    print()
     print('            // y = A * x')
     print('            static void dot(const Matrix & A, const Vector &x, '
           'Vector &y)')
-    print('            {')
+    beginmethod()
     for i in range(n):
         print('                y._%d = ' % i, end='')
         for j in range(n):
             print('A._%d%d%s ' % (i, j, ';' if j == n - 1 else ' + '), end='')
         print()
-    print('            }\n')
+    endmethod()
 
 
 def declare_dot_ab(n):
 
-    print()
     print('            // C = A * B')
     print('            static void dot(const Matrix & A, ' +
           'const Matrix &B, Matrix &C)')
-    print('            {')
+    beginmethod()
     for i in range(n):
         for j in range(n):
             print('                C._%d%d = ' % (i, j), end='')
             for k in range(n):
                 print('A._%d%d*B._%d%d%s' %
                       (i, k, k, j, ';\n' if k == n - 1 else ' + '), end='')
-    print('            }\n')
+    endmethod()
+
+
+def declare_outer(n):
+
+    print('            // A = x * y')
+    print('            static void outer(const Vector & x, ' +
+          'const Vector &y, Matrix &A)')
+    beginmethod()
+    for i in range(n):
+        for j in range(n):
+            pass  # print('                C._%d%d = ' % (i, j), end='')
+    endmethod()
 
 
 def declare_trans(n):
 
     print('            // At = A^T')
     print('            static void trans(const Matrix & A, Matrix & At)')
-    print('            {')
+    beginmethod()
     for i in range(n):
         print('              ', end='')
         for j in range(n):
             print('At._%d%d=A._%d%d;' % (i, j, j, i), end=' ')
         print()
-    print('            }\n')
+    endmethod()
 
 
 def declare_core(n):
@@ -157,7 +168,7 @@ def declare_core(n):
 
     declare_dot_ax(n)
     declare_dot_ab(n)
-    # declear_outer()
+    declare_outer(n)
     declare_trans(n)
     endclass()
 
