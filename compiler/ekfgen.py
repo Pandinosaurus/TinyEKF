@@ -198,7 +198,7 @@ def declare_dot_ab(n):
             write('                C._%d%d = ' % (i, j))
             for k in range(n):
                 write('A._%d%d*B._%d%d%s' %
-                      (i, k, k, j, ';\n' if k == n - 1 else ' + '))
+                      (i, k, k, j, split(k, n, ' + ', ';\n')))
     endmethod()
 
 
