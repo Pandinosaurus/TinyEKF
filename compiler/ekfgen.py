@@ -210,6 +210,8 @@ def declare_update_with_scalar(n):
     beginmethod()
     print('                Vector G;\n')
     print('                const auto R = stdMeasNoise * stdMeasNoise;\n')
+    print('                Vector PHt;')
+    print('                dot(P, h, PHt);')
     endmethod()
 
 def declare_core(n):
