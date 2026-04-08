@@ -201,6 +201,15 @@ def declare_predict():
      endmethod()
  
 
+def declare_update_with_scalar(n):
+    print('            void updateWithScalar(const Vector & h,')
+    print('                    const float error,') 
+    print('                    const float stdMeasNoise,')
+    print('                    const float minCovariance,')
+    print('                    const float maxCovariance)')
+    beginmethod()
+    endmethod()
+
 def declare_core(n):
 
     beginclass('Core')
@@ -213,6 +222,7 @@ def declare_core(n):
     print('Vector & x, Matrix & P) : x(x), P(P) {}\n')
 
     declare_predict()
+    declare_update_with_scalar(n)
     declare_add_covariance_noise(n)
     declare_enforce_symmetry(n)
 
