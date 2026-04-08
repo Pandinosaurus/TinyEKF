@@ -153,6 +153,18 @@ def declare_trans(n):
     endmethod()
 
 
+def declare_add_covariance_noise(n):
+
+    print('            void add_covariance_noise(const Vector & noise)')
+
+    beginmethod()
+
+    for i in range(n):
+        print('                P._%d%d += noise._%d;' % (i, i, i))
+
+    endmethod()
+
+
 def declare_core(n):
 
     beginclass('Core')
@@ -172,6 +184,7 @@ def declare_core(n):
     declare_dot_ab(n)
     declare_outer(n)
     declare_trans(n)
+    declare_add_covariance_noise(n)
     endclass()
 
 
@@ -184,8 +197,8 @@ def main():
 
     n = int(args.n)
 
+    print('// AUTO-GENERATED CODE; DO NOT EDIT\n')
     print('#pragma once\n')
-
     print('namespace tinyekf {\n')
 
     declare_vector(n)
