@@ -42,8 +42,9 @@ def declare_matrix(n):
 
     beginclass('Matrix')
 
+    print('            float')
     for i in range(n):
-        print('            ', end='')
+        print('              ', end='')
         for j in range(n):
             print('_%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ';')
         print()
