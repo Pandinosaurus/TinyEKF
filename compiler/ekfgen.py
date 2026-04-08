@@ -155,16 +155,11 @@ def declare_trans(n):
 
 
 def declare_add_covariance_noise(n):
-
     print('            void add_covariance_noise(const Vector & noise)')
-
     beginmethod()
-
     for i in range(n):
-        pass
-
+        print('                P._%d%d += noise._%d;' % (i, i, i))
     endmethod()
-
 
 def declare_get_pval():
     print('        static auto get_pval(const int i, const int j, ')
@@ -182,13 +177,6 @@ def declare_enforce_symmetry(n):
     print('            void enforce_symmetry(const float minval, '
           'const float maxval)')
 
-    beginmethod()
-
-    for i in range(n):
-        print('                P._%d%d += noise._%d;' % (i, i, i))
-
-    endmethod()
-
 
 def declare_core(n):
 
@@ -199,12 +187,11 @@ def declare_core(n):
 
     writedefault('Core')
 
-    print('Vector & x, Matrix & P) : x(x), P(P) {}')
+    print('Vector & x, Matrix & P) : x(x), P(P) {}\n')
 
     # declare_predict()
 
-    #declare_add_covariance_noise(n)
-    #declare_enforce_symmetry(n)
+    declare_add_covariance_noise(n)
 
     print('\n        private:\n')
 
