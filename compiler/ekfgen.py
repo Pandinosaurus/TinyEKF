@@ -22,6 +22,7 @@ def writedefault(name):
 
     print('\n            %s(' % name, end='')
 
+
 def endclass():
 
     print('    };\n')
@@ -74,9 +75,9 @@ def declare_matrix(n):
     for i in range(n):
         print('              ', end='')
         for j in range(n):
-            print('_%d%d(_%d%d)' % (i, j, i, j), end=', ' if i*n+j < n*n-1 else ' {}')
+            print('_%d%d(_%d%d)' %
+                  (i, j, i, j), end=', ' if i*n+j < n*n-1 else ' {}')
         print()
-
 
     endclass()
 
@@ -84,7 +85,7 @@ def declare_matrix(n):
 def declare_predict():
 
     print()
-    print('            // P_k = F_{k-1} P_{k-1} F^T_{k-1} --------------------')
+    print('            // P_k = F_{k-1} P_{k-1} F^T_{k-1} -------------------')
     print('            auto predict(const Matrix & F) -> Matrix')
     print('            {')
     print('                Matrix FP;')
@@ -95,17 +96,17 @@ def declare_predict():
     print('            }\n')
 
 
-
 def declare_dot_ax(n):
 
     print()
     print('            // y = A * x')
-    print('            static void dot(const Matrix & A, const Vector &x, Vector &y)')
+    print('            static void dot(const Matrix & A, const Vector &x, '
+          'Vector &y)')
     print('            {')
     for i in range(n):
         print('                y._%d = ' % i, end='')
         for j in range(n):
-            print('A._%d%d%s ' % (i, j, ';' if j == n - 1 else ' + '), end='');
+            print('A._%d%d%s ' % (i, j, ';' if j == n - 1 else ' + '), end='')
         print()
     print('            }\n')
 
@@ -114,14 +115,17 @@ def declare_dot_ab(n):
 
     print()
     print('            // C = A * B')
-    print('            static void dot(const Matrix & A, const Matrix &B, Matrix &C)')
+    print('            static void dot(const Matrix & A, ' +
+          'const Matrix &B, Matrix &C)')
     print('            {')
     for i in range(n):
         for j in range(n):
             print('                C._%d%d = ' % (i, j), end='')
             for k in range(n):
-                print('A._%d%d*B._%d%d%s' % (i, k, k, j, ';\n' if k == n - 1 else ' + '), end='');
+                print('A._%d%d*B._%d%d%s' %
+                      (i, k, k, j, ';\n' if k == n - 1 else ' + '), end='')
     print('            }\n')
+
 
 def declare_trans(n):
 
@@ -147,12 +151,13 @@ def declare_core(n):
 
     print('Vector & x, Matrix & P) : x(x), P(P) {}')
 
-    #declare_predict()
+    # declare_predict()
 
     print('\n        private:\n')
 
     declare_dot_ax(n)
     declare_dot_ab(n)
+    # declear_outer()
     declare_trans(n)
     endclass()
 
