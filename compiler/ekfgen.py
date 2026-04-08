@@ -90,6 +90,8 @@ def declare_helper(n):
 
     writedefault('Helper')
 
+    print('Vector & x, Matrix & P) : x(x), P(P) {}')
+
     endclass()
 
 
@@ -110,7 +112,7 @@ def main():
 
     declare_matrix(n)
 
-    #declare_helper(n)
+    declare_helper(n)
 
     print('}\n')
 
