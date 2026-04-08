@@ -36,13 +36,16 @@ def endclass():
 def split(i, n, s1, s2):
     return s2 if i == n-1 else s1
 
+def commasplit(i, n, s):
+    return split(i, n, ', ', s)
+
 def declare_vector(n):
 
     beginclass('Vector')
 
     write('            float ')
     for i in range(n):
-        write('_%d%s' % (i, split(i, n, ', ', ';\n')))
+        write('_%d%s' % (i, commasplit(i, n, ';\n')))
 
     writedefault('Vector')
 
