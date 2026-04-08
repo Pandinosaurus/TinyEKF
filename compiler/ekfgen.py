@@ -162,7 +162,7 @@ def declare_add_covariance_noise(n):
     endmethod()
 
 def declare_get_pval():
-    print('        static auto get_pval(const int i, const int j, ')
+    print('            static auto get_pval(const int i, const int j, ')
     print('              const float pval, const float minval,')
     print('              const float maxval) -> float')
     beginmethod()
@@ -189,6 +189,12 @@ def declare_enforce_symmetry(n):
     endmethod()
 
 
+def declare_predict():
+     print('            // P_k = F_{k-1} P_{k-1} F^T_{k-1} --------------------')
+     print('            void predict(const Matrix &f)')
+     beginmethod()
+     endmethod()
+ 
 
 def declare_core(n):
 
@@ -201,18 +207,17 @@ def declare_core(n):
 
     print('Vector & x, Matrix & P) : x(x), P(P) {}\n')
 
-    # declare_predict()
-
+    declare_predict()
     declare_add_covariance_noise(n)
     declare_enforce_symmetry(n)
 
     print('\n        private:\n')
 
+    declare_get_pval()
     declare_dot_ax(n)
     declare_dot_ab(n)
     declare_outer(n)
     declare_trans(n)
-    declare_get_pval()
     endclass()
 
 
