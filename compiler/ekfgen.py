@@ -55,7 +55,7 @@ def declare_vector(n):
     write('               : ')
 
     for i in range(n):
-        write('_%d(_%d)%s' % (i, i, ' {}\n' if i == n - 1 else ', '))
+        write('_%d(_%d)%s' % (i, i, commasplit(i, n, ' {}\n')))
 
     endclass()
 
