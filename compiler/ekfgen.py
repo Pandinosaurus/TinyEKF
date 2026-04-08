@@ -191,8 +191,13 @@ def declare_enforce_symmetry(n):
 
 def declare_predict():
      print('            // P_k = F_{k-1} P_{k-1} F^T_{k-1} --------------------')
-     print('            void predict(const Matrix &f)')
+     print('            void predict(const Matrix &F)')
      beginmethod()
+     print('                Matrix FP;')
+     print('                dot(F, P, FP);')
+     print('                Matrix Ft;')
+     print('                trans(F, Ft);')
+     print('                dot(FP, Ft, P);')
      endmethod()
  
 
