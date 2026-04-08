@@ -9,5 +9,8 @@ tinyekf.hpp: ekfgen.py
 dump:
 	./ekfgen.py 7 | less
 
+edit:
+	vim ekfgen.py
+
 clean:
 	rm -f tester.o tinyekf.hpp

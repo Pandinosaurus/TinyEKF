@@ -158,7 +158,11 @@ def declare_update_with_scalar(n):
     print('                Vector G;\n')
     print('                const auto R = stdMeasNoise * stdMeasNoise;\n')
     print('                Vector PHt;')
-    print('                dot(P, h, PHt);')
+    print('                dot(P, h, PHt); // PH\n')
+    write('                const auto HPHR = R') 
+    for i in range(n):
+        write(' + h._%d*PHt._%d' % (i, i))
+    print(';')
     endmethod()
 
 def declare_dot_ax(n):
