@@ -173,9 +173,14 @@ def declare_get_pval():
     endmethod()
 
 def declare_enforce_symmetry(n):
-
     print('            void enforce_symmetry(const float minval, '
           'const float maxval)')
+    beginmethod()
+    for i in range(n):
+        for j in range(n):
+            print('                P._%d%d = P._%d%d;' % (i, j, j, i))
+    endmethod()
+
 
 
 def declare_core(n):
@@ -192,6 +197,7 @@ def declare_core(n):
     # declare_predict()
 
     declare_add_covariance_noise(n)
+    declare_enforce_symmetry(n)
 
     print('\n        private:\n')
 
