@@ -109,6 +109,20 @@ def declare_dot_ax(n):
         print()
     print('            }\n')
 
+
+def declare_dot_ab(n):
+
+    print()
+    print('            // C = A * B')
+    print('            static void dot(const Matrix & A, const Matrix &B, Matrix &C)')
+    print('            {')
+    for i in range(n):
+        for j in range(n):
+            print('                C._%d%d = ' % (i, j), end='')
+            for k in range(n):
+                print('A._%d%d*B._%d%d%s' % (i, k, k, j, ';\n' if k == n - 1 else ' + '), end='');
+    print('            }\n')
+
 def declare_trans(n):
 
     print('            // At = A^T')
@@ -138,7 +152,7 @@ def declare_core(n):
     print('\n        private:\n')
 
     declare_dot_ax(n)
-    #declare_dot_ab(n)
+    declare_dot_ab(n)
     declare_trans(n)
     endclass()
 
