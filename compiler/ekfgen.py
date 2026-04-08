@@ -20,6 +20,8 @@ def writedefault(name):
 
     print('\n            %s() = default;' % name)
 
+    print('\n            %s(' % name, end='')
+
 def endclass():
 
     print('    };\n')
@@ -34,6 +36,14 @@ def declare_vector(n):
         print('_%d%s' % (i, ';\n' if i == n - 1 else ', '), end='')
 
     writedefault('Vector')
+
+    for i in range(n):
+        print('float _%d%s' % (i, ')\n' if i == n - 1 else ', '), end='')
+
+    print('               : ', end='')
+
+    for i in range(n):
+        print('_%d(_%d)%s' % (i, i, ' {}\n' if i == n - 1 else ', '), end='')
 
     endclass()
 
@@ -50,6 +60,23 @@ def declare_matrix(n):
         print()
 
     writedefault('Matrix')
+
+    print()
+
+    for i in range(n):
+        print('              ', end='')
+        for j in range(n):
+            print('float _%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ')')
+        print()
+
+    print('            :')
+
+    for i in range(n):
+        print('              ', end='')
+        for j in range(n):
+            print('_%d%d(_%d%d)' % (i, j, i, j), end=', ' if i*n+j < n*n-1 else ' {}')
+        print()
+
 
     endclass()
 
@@ -83,7 +110,7 @@ def main():
 
     declare_matrix(n)
 
-    declare_helper(n)
+    #declare_helper(n)
 
     print('}\n')
 
