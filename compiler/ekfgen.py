@@ -68,7 +68,7 @@ def declare_matrix(n):
     for i in range(n):
         write('              ')
         for j in range(n):
-            print(' _%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ';')
+            print(' _%d%d' % (i, j), end=commasplit(i*n+j, n*n, ';'))
         print()
 
     writedefault('Matrix')
@@ -78,7 +78,7 @@ def declare_matrix(n):
     for i in range(n):
         write('              ')
         for j in range(n):
-            print('float _%d%d' % (i, j), end=', ' if i*n+j < n*n-1 else ')')
+            print('float _%d%d' % (i, j), end=commasplit(i*n+j, n*n, ')'))
         print()
 
     print('            :')
@@ -87,7 +87,7 @@ def declare_matrix(n):
         write('              ')
         for j in range(n):
             print('_%d%d(_%d%d)' %
-                  (i, j, i, j), end=', ' if i*n+j < n*n-1 else ' {}')
+                  (i, j, i, j), end=commasplit(i*n+j, n*n, ' {}'))
         print()
 
     endclass()
@@ -170,7 +170,7 @@ def declare_update_with_scalar(n):
     print('                // kalman gain = (PH\' (HPH\' + R )^-1)')
     write('                const auto G = Vector(')
     for i in range(n):
-        write('PHt._%d/HPHR%s' % (i, ');\n' if i==n-1 else ', '))
+        write('PHt._%d/HPHR%s' % (i, commasplit(i, n, ');\n')))
     endmethod()
 
 def declare_dot_ax(n):
@@ -182,8 +182,7 @@ def declare_dot_ax(n):
     for i in range(n):
         write('                y._%d = ' % i)
         for j in range(n):
-            write('A._%d%d%s ' % (i, j, ';' if j == n - 1 else ' + '))
-        print()
+            write('A._%d%d%s ' % (i, j, split(j, n, ' + ', ';\n')))
     endmethod()
 
 
