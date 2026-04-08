@@ -178,7 +178,14 @@ def declare_enforce_symmetry(n):
     beginmethod()
     for i in range(n):
         for j in range(n):
-            print('                P._%d%d = P._%d%d;' % (i, j, j, i))
+            if i == j:
+                print('                P._%d%d = get_pval(%d,% d, '
+                      '0.5*P._%d%d + 0.5*P._%d%d, minval, maxval);' %
+                      (i, j, i, j, i, j, j, i))
+            else:
+                print('                P._%d%d = P._%d%d = get_pval(%d,% d, '
+                      '0.5*P._%d%d + 0.5*P._%d%d, minval, maxval);' %
+                      (i, j, j, i, i, j, i, j, j, i))
     endmethod()
 
 
