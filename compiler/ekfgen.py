@@ -81,14 +81,14 @@ def declare_matrix(n):
     endclass()
 
 
-def declare_helper(n):
+def declare_core(n):
 
-    beginclass('Helper')
+    beginclass('Core')
 
     print('            Vector x;')
     print('            Matrix P;')
 
-    writedefault('Helper')
+    writedefault('Core')
 
     print('Vector & x, Matrix & P) : x(x), P(P) {}')
 
@@ -112,7 +112,7 @@ def main():
 
     declare_matrix(n)
 
-    declare_helper(n)
+    declare_core(n)
 
     print('}\n')
 
