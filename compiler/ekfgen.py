@@ -155,7 +155,7 @@ def declare_trans(n):
 
 
 def declare_add_covariance_noise(n):
-    print('            void add_covariance_noise(const Vector & noise)')
+    print('            void addCovarianceNoise(const Vector & noise)')
     beginmethod()
     for i in range(n):
         print('                P._%d%d += noise._%d;' % (i, i, i))
@@ -173,7 +173,7 @@ def declare_get_pval():
     endmethod()
 
 def declare_enforce_symmetry(n):
-    print('            void enforce_symmetry(const float minval, '
+    print('            void enforceSymmetry(const float minval, '
           'const float maxval)')
     beginmethod()
     for i in range(n):
