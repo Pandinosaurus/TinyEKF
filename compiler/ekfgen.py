@@ -47,7 +47,7 @@ def declare_vector(n):
     writedefault('Vector')
 
     for i in range(n):
-        write('float _%d%s' % (i, ')\n' if i == n - 1 else ', '))
+        write('float _%d%s' % (i, split(i, n, ', ', ')\n')))
 
     write('               : ')
 
