@@ -153,9 +153,34 @@ def declare_trans(n):
     endmethod()
 
 
+
 def declare_add_covariance_noise(n):
 
     print('            void add_covariance_noise(const Vector & noise)')
+
+    beginmethod()
+
+    for i in range(n):
+        pass
+
+    endmethod()
+
+
+def declare_get_pval():
+    print('        static auto get_pval(const int i, const int j, ')
+    print('              const float pval, const float minval,')
+    print('              const float maxval) -> float')
+    beginmethod()
+    print('              return')
+    print('                isnan(pval) || pval > maxval ? maxval : ')
+    print('                i==j && pval < minval ? minval : ')
+    print('                pval; ')
+    endmethod()
+
+def declare_enforce_symmetry(n):
+
+    print('            void enforce_symmetry(const float minval, '
+          'const float maxval)')
 
     beginmethod()
 
@@ -178,13 +203,16 @@ def declare_core(n):
 
     # declare_predict()
 
+    #declare_add_covariance_noise(n)
+    #declare_enforce_symmetry(n)
+
     print('\n        private:\n')
 
     declare_dot_ax(n)
     declare_dot_ab(n)
     declare_outer(n)
     declare_trans(n)
-    declare_add_covariance_noise(n)
+    declare_get_pval()
     endclass()
 
 
@@ -199,6 +227,7 @@ def main():
 
     print('// AUTO-GENERATED CODE; DO NOT EDIT\n')
     print('#pragma once\n')
+    print('#include <math.h>\n')
     print('namespace tinyekf {\n')
 
     declare_vector(n)
