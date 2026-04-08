@@ -96,9 +96,21 @@ def declare_predict():
 
 
 
-def declare_trans(n):
+def declare_dot_ax(n):
 
     print()
+    print('            // y = A * x')
+    print('            static void dot(const Matrix & A, const Vector &x, Vector &y)')
+    print('            {')
+    for i in range(n):
+        print('                y._%d = ' % i, end='')
+        for j in range(n):
+            print('A._%d%d%s ' % (i, j, ';' if j == n - 1 else ' + '), end='');
+        print()
+    print('            }\n')
+
+def declare_trans(n):
+
     print('            // At = A^T')
     print('            static void trans(const Matrix & A, Matrix & At)')
     print('            {')
@@ -123,10 +135,10 @@ def declare_core(n):
 
     #declare_predict()
 
-    print('        private:\n')
+    print('\n        private:\n')
 
-    #declare_dot1(n)
-    #declare_dot1(n)
+    declare_dot_ax(n)
+    #declare_dot_ab(n)
     declare_trans(n)
     endclass()
 
