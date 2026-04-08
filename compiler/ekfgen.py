@@ -208,6 +208,8 @@ def declare_update_with_scalar(n):
     print('                    const float minCovariance,')
     print('                    const float maxCovariance)')
     beginmethod()
+    print('                Vector G;\n')
+    print('                const auto R = stdMeasNoise * stdMeasNoise;\n')
     endmethod()
 
 def declare_core(n):
