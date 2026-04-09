@@ -172,7 +172,11 @@ def declare_update_with_scalar(n):
     for i in range(n):
         write('PHt._%d/HPHR%s' % (i, commasplit(i, n, ');\n\n')))
     print('                Matrix GH;')
-    print('                outer(G, h, GH);')
+    print('                outer(G, h, GH);\n')
+    write('                ')
+    for i in range(n):
+        write('GH._%d%d-=1; ' % (i, i))
+    print()
     endmethod()
 
 
