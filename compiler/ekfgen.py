@@ -186,12 +186,23 @@ def declare_update_with_scalar(n):
     print('                Matrix GH_I_P;')
     print('                dot(GH, P, GH_I_P);')
     print()
-    print('                // add the measurement variance and ensure '
-          'boundedness and symmetry')
+    print('                // State updated') 
     write('                ')
     for i in range(n):
         write('x._%d+=G._%d *error; ' % (i, i))
-    print()
+    print('\n')
+    print('                // Add covariance noise and ensure boundedness '
+          'and symmetry')
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                print('                P._%d%d = get_pval(%d,% d, '
+                      '0.5*P._%d%d + 0.5*P._%d%d + G._%d * R * G._%d, minCovariance, maxCovariance);' %
+                      (i, j, i, j, i, j, j, i, i, j))
+            else:
+                print('                P._%d%d = P._%d%d = get_pval(%d,% d, '
+                      '0.5*P._%d%d + 0.5*P._%d%d + G._%d * R * G._%d, minCovariance, maxCovariance);' %
+                      (i, j, j, i, i, j, i, j, j, i, i, j))
     endmethod()
 
 
