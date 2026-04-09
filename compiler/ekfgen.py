@@ -185,6 +185,13 @@ def declare_update_with_scalar(n):
     print('                // (GH - I)*P')
     print('                Matrix GH_I_P;')
     print('                dot(GH, P, GH_I_P);')
+    print()
+    print('                // add the measurement variance and ensure '
+          'boundedness and symmetry')
+    write('                ')
+    for i in range(n):
+        write('x._%d+=G._%d *error; ' % (i, i))
+    print()
     endmethod()
 
 
