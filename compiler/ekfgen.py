@@ -170,8 +170,11 @@ def declare_update_with_scalar(n):
     print('                // kalman gain = (PH\' (HPH\' + R )^-1)')
     write('                const auto G = Vector(')
     for i in range(n):
-        write('PHt._%d/HPHR%s' % (i, commasplit(i, n, ');\n')))
+        write('PHt._%d/HPHR%s' % (i, commasplit(i, n, ');\n\n')))
+    print('                Matrix GH;')
+    print('                outer(G, h, GH);')
     endmethod()
+
 
 def declare_dot_ax(n):
 
